@@ -108,6 +108,7 @@
   .score-block { background: var(--paper); border: 1px solid rgba(137,126,106,0.22); padding: 1.3rem 0.8rem; text-align: center; }
   .score-num { font-size: 2.6rem; font-weight: bold; color: var(--ink); font-style: italic; line-height: 1; }
   .score-num.red { color: var(--brick); }
+  .score-num.red { font-size: 1.5rem; font-style: italic; line-height: 1.15; }
   .score-den { font-size: 1.1rem; color: var(--fade); font-weight: normal; }
   .score-label { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fade); margin-top: 0.5rem; font-weight: bold; }
   .grade-desc { text-align: center; font-style: italic; margin-bottom: 1.6rem; padding: 0 0.5rem; line-height: 1.6; }
@@ -171,7 +172,7 @@
     <div class="score-row">
       <div class="score-block"><div class="score-num"><span id="r-correct">0</span><span class="score-den">/<span id="r-total">0</span></span></div><div class="score-label">Argument moves</div></div>
       <div class="score-block"><div class="score-num"><span id="r-pct">0</span><span class="score-den">%</span></div><div class="score-label">Accuracy</div></div>
-      <div class="score-block"><div class="score-num red" id="r-band">-</div><div class="score-label">Standard</div></div>
+      <div class="score-block"><div class="score-num red" id="r-band">-</div><div class="score-label">Verdict</div></div>
     </div>
     <div class="grade-desc" id="r-desc"></div>
     <div class="breakdown"><div class="breakdown-label">By essay skill</div><div id="r-breakdown"></div></div>
@@ -352,7 +353,7 @@ const FLOW = [
              "The Vietnam War was a very long and complicated conflict that lasted many years and involved many different countries, including France, China, America and the Soviet Union, and sadly a great many people ended up dying in it before it was over.",
              "Vietnam's victory really belonged to its powerful friends abroad. This essay will argue that Chinese weapons and Soviet backing were what actually beat the USA, and that a small country like Vietnam could never have won such an enormous war on the strength of its own people alone."],
     correct:0,
-    explanation:"The strongest opening takes a position the evidence can defend, that the war began anti-colonial and became a Cold War fight, and signals the argument to come. One rival only narrates that it was 'long and complicated', which is the commonest way learners lose marks: describing instead of arguing. The other does argue, but it hands the whole war to China and the USSR and quietly erases the one thing the question is about: how a small country's own strength beat a superpower." },
+    explanation:"The strongest opening takes a position the evidence can defend, that the war began anti-colonial and became a Cold War fight, and signals the argument to come. One rival only narrates that it was 'long and complicated', which is the most common way to lose marks: describing instead of arguing. The other does argue, but it hands the whole war to China and the USSR and quietly erases the one thing the question is about: how a small country's own strength beat a superpower." },
 
   { type:"skills", stage:"Transfer",
     html:`<div class="stage-tag">The move you now own</div><h2>Argue, evidence, weigh</h2>
@@ -474,11 +475,11 @@ function showResults(){
   assessedIds.forEach(i=>{ if(state.answers[i]===FLOW[i].correct) correct++; });
   const pct=totalQ?Math.round((correct/totalQ)*100):0;
   let band="-",desc="";
-  if(pct>=85){band="7";desc="Excellent. You are taking a clear position and weighing evidence on both sides, which is exactly what a top essay does.";}
-  else if(pct>=70){band="6";desc="Strong. Your argument holds. Push every judgement to track change over time, not just pick a side.";}
-  else if(pct>=55){band="5";desc="Good foundation. You have the evidence. Focus next on sorting each fact to the claim it truly supports.";}
-  else if(pct>=40){band="4";desc="Getting there. Watch the difference between describing what happened and arguing a position about it.";}
-  else {band="3";desc="Rebuild from the evidence piles, then retry. Every question here asks you to argue, not to recall.";}
+  if(pct>=85){band="Excellent";desc="Excellent. You are taking a clear position and weighing evidence on both sides, which is exactly what a top essay does.";}
+  else if(pct>=70){band="Strong";desc="Strong. Your argument holds. Push every judgement to track change over time, not just pick a side.";}
+  else if(pct>=55){band="Solid";desc="Good foundation. You have the evidence. Focus next on sorting each fact to the claim it truly supports.";}
+  else if(pct>=40){band="Patchy";desc="Getting there. Watch the difference between describing what happened and arguing a position about it.";}
+  else {band="Start again";desc="Rebuild from the evidence piles, then retry. Every question here asks you to argue, not to recall.";}
   document.getElementById("r-correct").textContent=correct;
   document.getElementById("r-total").textContent=totalQ;
   document.getElementById("r-pct").textContent=pct;
